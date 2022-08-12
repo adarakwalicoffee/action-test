@@ -32,6 +32,13 @@ jobs:
       - name: Clone The Secret Mirror Repository
         run: |
           git clone https://${{ secrets.GH_TOKEN }}@github.com/${{ secrets.REPO }} -b ${Branch} source
+          
+      - name: Downloading Config.env
+        run: |
+          cd source
+          wget ${{ secrets.CONFIG_FILE_URL }}
+          cd ..
+          
       - name: Compile The Mirroring Docker Container
         run: |
           cd source || exit 1
